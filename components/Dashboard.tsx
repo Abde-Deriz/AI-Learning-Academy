@@ -173,7 +173,6 @@ const Dashboard: React.FC = () => {
                 <CourseCard
                 key={course.id}
                 course={course}
-                // FIX: The onSelectCourse prop expects a function that takes a course, but was passed a function with no arguments.
                 onSelectCourse={(selectedCourse) => navigate(`/course/${selectedCourse.slug}`)}
                 isFirst={index === 0 && !searchTerm} // Guide only points to first card on initial load
                 animationDelay={300 + index * 100}
