@@ -56,9 +56,9 @@ export default function App() {
 
   // Check for logged-in user on initial load
   useEffect(() => {
-    const loggedInUserEmail = localStorage.getItem('ai-explorers-loggedIn');
+    const loggedInUserEmail = localStorage.getItem('spark-ai-academy-loggedIn');
     if (loggedInUserEmail) {
-      const accounts = JSON.parse(localStorage.getItem('ai-explorers-accounts') || '{}');
+      const accounts = JSON.parse(localStorage.getItem('spark-ai-academy-accounts') || '{}');
       const userData = accounts[loggedInUserEmail];
       if (userData) {
         login({ email: loggedInUserEmail, pass: userData.pass }, true);
@@ -152,11 +152,11 @@ export default function App() {
       const updatedBadgeIds = new Set([...earnedBadgeIds, ...newBadges]);
       setEarnedBadgeIds(updatedBadgeIds);
 
-      const profileJSON = localStorage.getItem(`ai-explorers-profile-${user.email}`);
+      const profileJSON = localStorage.getItem(`spark-ai-academy-profile-${user.email}`);
       if (profileJSON) {
         const profile = JSON.parse(profileJSON);
         profile.badges = Array.from(updatedBadgeIds);
-        localStorage.setItem(`ai-explorers-profile-${user.email}`, JSON.stringify(profile));
+        localStorage.setItem(`spark-ai-academy-profile-${user.email}`, JSON.stringify(profile));
       }
     }
   }, [progress, totalStars, user, earnedBadgeIds]);
@@ -170,14 +170,14 @@ export default function App() {
   }, [path, navigate]);
 
   const signup = (signupData: SignupData): boolean => {
-    const accounts = JSON.parse(localStorage.getItem('ai-explorers-accounts') || '{}');
+    const accounts = JSON.parse(localStorage.getItem('spark-ai-academy-accounts') || '{}');
     if (accounts[signupData.email]) {
       alert('An account with this email already exists!');
       return false;
     }
 
     accounts[signupData.email] = { pass: signupData.pass, name: signupData.name, age: signupData.age };
-    localStorage.setItem('ai-explorers-accounts', JSON.stringify(accounts));
+    localStorage.setItem('spark-ai-academy-accounts', JSON.stringify(accounts));
 
     const initialProfile = {
       avatar: { icon: 'default' },
@@ -187,13 +187,13 @@ export default function App() {
       favorites: [],
       starPenalty: 0,
     };
-    localStorage.setItem(`ai-explorers-profile-${signupData.email}`, JSON.stringify(initialProfile));
+    localStorage.setItem(`spark-ai-academy-profile-${signupData.email}`, JSON.stringify(initialProfile));
 
     return login({ email: signupData.email, pass: signupData.pass });
   };
 
   const login = (credentials: { email: string, pass: string }, isAutoLogin = false): boolean => {
-    const accounts = JSON.parse(localStorage.getItem('ai-explorers-accounts') || '{}');
+    const accounts = JSON.parse(localStorage.getItem('spark-ai-academy-accounts') || '{}');
     const account = accounts[credentials.email];
 
     if (!account || (!isAutoLogin && account.pass !== credentials.pass)) {
@@ -201,7 +201,7 @@ export default function App() {
       return false;
     }
     
-    const profileJSON = localStorage.getItem(`ai-explorers-profile-${credentials.email}`);
+    const profileJSON = localStorage.getItem(`spark-ai-academy-profile-${credentials.email}`);
     const profile = profileJSON ? JSON.parse(profileJSON) : { avatar: { icon: 'default' }, streakData: { count: 1, lastLogin: '' }, progress: {}, badges: [], favorites: [], starPenalty: 0 };
     
     const initialProgress: { [key: string]: Set<string> } = {};
@@ -240,10 +240,10 @@ export default function App() {
     };
     setUser(loggedInUser);
 
-    localStorage.setItem(`ai-explorers-profile-${credentials.email}`, JSON.stringify(profile));
-    localStorage.setItem('ai-explorers-loggedIn', credentials.email);
+    localStorage.setItem(`spark-ai-academy-profile-${credentials.email}`, JSON.stringify(profile));
+    localStorage.setItem('spark-ai-academy-loggedIn', credentials.email);
 
-    const hasSeenGuide = localStorage.getItem(`ai-explorers-guide-seen-${credentials.email}`);
+    const hasSeenGuide = localStorage.getItem(`spark-ai-academy-guide-seen-${credentials.email}`);
     if (!hasSeenGuide) {
       setShowGuide(true);
     }
@@ -260,7 +260,7 @@ export default function App() {
 
   const handleLogout = () => {
     if (user) {
-      localStorage.setItem('ai-explorers-last-loggedIn-email', user.email);
+      localStorage.setItem('spark-ai-academy-last-loggedIn-email', user.email);
     }
     setUser(null);
     setProgress({});
@@ -268,7 +268,7 @@ export default function App() {
     setStarPenalty(0);
     setEarnedBadgeIds(new Set());
     setFavoriteCourses(new Set());
-    localStorage.removeItem('ai-explorers-loggedIn');
+    localStorage.removeItem('spark-ai-academy-loggedIn');
     navigate('/');
   };
 
@@ -294,14 +294,14 @@ export default function App() {
       
       const isCourseNowCompleted = newCourseProgress.size === course.lessons.length && course.lessons.length > 0;
       
-      const profileJSON = localStorage.getItem(`ai-explorers-profile-${user.email}`);
+      const profileJSON = localStorage.getItem(`spark-ai-academy-profile-${user.email}`);
       const profile = profileJSON ? JSON.parse(profileJSON) : {};
       const progressToStore: { [key: string]: string[] } = {};
       Object.keys(newProgress).forEach(cId => {
           progressToStore[cId] = Array.from(newProgress[cId]);
       });
       profile.progress = progressToStore;
-      localStorage.setItem(`ai-explorers-profile-${user.email}`, JSON.stringify(profile));
+      localStorage.setItem(`spark-ai-academy-profile-${user.email}`, JSON.stringify(profile));
       
       setTimeout(() => {
         if (isCourseNowCompleted) {
@@ -324,17 +324,17 @@ export default function App() {
     setUser(prevUser => {
         if (!prevUser) return null;
         const updatedUser: User = { ...prevUser, ...newUserData };
-        const accounts = JSON.parse(localStorage.getItem('ai-explorers-accounts') || '{}');
+        const accounts = JSON.parse(localStorage.getItem('spark-ai-academy-accounts') || '{}');
         if (accounts[prevUser.email] && newUserData.name) {
             accounts[prevUser.email].name = newUserData.name;
-            localStorage.setItem('ai-explorers-accounts', JSON.stringify(accounts));
+            localStorage.setItem('spark-ai-academy-accounts', JSON.stringify(accounts));
         }
 
-        const profileJSON = localStorage.getItem(`ai-explorers-profile-${prevUser.email}`);
+        const profileJSON = localStorage.getItem(`spark-ai-academy-profile-${prevUser.email}`);
         if (profileJSON) {
             const profile = JSON.parse(profileJSON);
             profile.avatar = updatedUser.avatar;
-            localStorage.setItem(`ai-explorers-profile-${prevUser.email}`, JSON.stringify(profile));
+            localStorage.setItem(`spark-ai-academy-profile-${prevUser.email}`, JSON.stringify(profile));
         }
         return updatedUser;
     });
@@ -353,11 +353,11 @@ export default function App() {
             newFavorites.add(courseId);
         }
 
-        const profileJSON = localStorage.getItem(`ai-explorers-profile-${user.email}`);
+        const profileJSON = localStorage.getItem(`spark-ai-academy-profile-${user.email}`);
         if (profileJSON) {
             const profile = JSON.parse(profileJSON);
             profile.favorites = Array.from(newFavorites);
-            localStorage.setItem(`ai-explorers-profile-${user.email}`, JSON.stringify(profile));
+            localStorage.setItem(`spark-ai-academy-profile-${user.email}`, JSON.stringify(profile));
         }
         return newFavorites;
     });
@@ -367,11 +367,11 @@ export default function App() {
     if (!user) return;
     setStarPenalty(prevPenalty => {
         const newPenalty = prevPenalty + amount;
-        const profileJSON = localStorage.getItem(`ai-explorers-profile-${user.email}`);
+        const profileJSON = localStorage.getItem(`spark-ai-academy-profile-${user.email}`);
         if (profileJSON) {
             const profile = JSON.parse(profileJSON);
             profile.starPenalty = newPenalty;
-            localStorage.setItem(`ai-explorers-profile-${user.email}`, JSON.stringify(profile));
+            localStorage.setItem(`spark-ai-academy-profile-${user.email}`, JSON.stringify(profile));
         }
         return newPenalty;
     });
@@ -379,7 +379,7 @@ export default function App() {
   
   const handleFinishGuide = () => {
     if (user) {
-        localStorage.setItem(`ai-explorers-guide-seen-${user.email}`, 'true');
+        localStorage.setItem(`spark-ai-academy-guide-seen-${user.email}`, 'true');
     }
     setShowGuide(false);
   }

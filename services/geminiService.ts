@@ -1,7 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
 import { HelpType, MissionData, MissionType } from '../types';
 
-const API_KEY = process.env.API_KEY;
+const API_KEY = "";//process.env.API_KEY;
 
 if (!API_KEY) {
   console.warn("API_KEY environment variable not set for Gemini.");
@@ -22,14 +22,14 @@ export const getAiHelp = async (
   let prompt = '';
   const basePrompt = `You are a friendly, encouraging AI robot teaching a 7-year-old about programming and AI. Your tone is simple, fun, and positive.`;
 
-  switch(helpType) {
+  switch (helpType) {
     case 'hint':
       // Sanitize mission data to keep prompt concise
       const missionSummary = JSON.stringify(missionData, (key, value) => {
-          if (key === 'items' && Array.isArray(value)) return `[${value.length} items]`;
-          if (missionType === 'jigsaw_puzzle' && key === 'pieces') return `[${value.length} puzzle pieces]`;
-          if (missionType === 'fill_in_the_blanks' && key === 'parts') return `[A fill-in-the-blanks sentence]`;
-          return value;
+        if (key === 'items' && Array.isArray(value)) return `[${value.length} items]`;
+        if (missionType === 'jigsaw_puzzle' && key === 'pieces') return `[${value.length} puzzle pieces]`;
+        if (missionType === 'fill_in_the_blanks' && key === 'parts') return `[A fill-in-the-blanks sentence]`;
+        return value;
       }, 2);
 
       prompt = `${basePrompt} The student is stuck on a mission about "${topic}". The mission is: ${missionSummary}. Give a short, encouraging hint (under 25 words) to help them solve it without giving away the answer. Start with 'Hint:'.`;
@@ -51,8 +51,8 @@ export const getAiHelp = async (
 
   try {
     const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
-        contents: prompt,
+      model: 'gemini-2.5-flash',
+      contents: prompt,
     });
     return response.text;
   } catch (error) {

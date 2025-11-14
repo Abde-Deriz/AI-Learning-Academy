@@ -24,11 +24,11 @@ const TermsOfService: React.FC = () => {
             <div className="prose max-w-none text-slate-700">
                 <h2 className="text-2xl font-bold text-slate-700">1. Acceptance of Terms</h2>
                 <p>
-                    By creating an account and using the AI Explorers Academy, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the application.
+                    By creating an account and using the Spark AI Academy, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the application.
                 </p>
                 <h2 className="text-2xl font-bold text-slate-700 mt-6">2. Use of the Service</h2>
                 <p>
-                    AI Explorers Academy is an educational platform designed for learning purposes. You agree to use the service only for its intended purpose. You are responsible for your own conduct and content while using the service.
+                    Spark AI Academy is an educational platform designed for learning purposes. You agree to use the service only for its intended purpose. You are responsible for your own conduct and content while using the service.
                 </p>
                 <h2 className="text-2xl font-bold text-slate-700 mt-6">3. User Accounts</h2>
                 <p>
@@ -36,7 +36,7 @@ const TermsOfService: React.FC = () => {
                 </p>
                 <h2 className="text-2xl font-bold text-slate-700 mt-6">4. Intellectual Property</h2>
                 <p>
-                    All content provided on the AI Explorers Academy, including courses, lessons, and icons, is the property of the academy and is protected by copyright laws. You may not reuse, republish, or redistribute any of the content without permission.
+                    All content provided on the Spark AI Academy, including courses, lessons, and icons, is the property of the academy and is protected by copyright laws. You may not reuse, republish, or redistribute any of the content without permission.
                 </p>
                  <h2 className="text-2xl font-bold text-slate-700 mt-6">5. Disclaimers</h2>
                 <p>

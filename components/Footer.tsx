@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
           <a href="#" className="text-slate-500 hover:text-blue-600 transition" aria-label="Facebook"><FacebookIcon className="w-6 h-6" /></a>
           <a href="#" className="text-slate-500 hover:text-pink-500 transition" aria-label="Instagram"><InstagramIcon className="w-6 h-6" /></a>
         </div>
-        <p className="text-sm">&copy; {new Date().getFullYear()} AI Explorers Academy. All rights reserved.</p>
+        <p className="text-sm">&copy; {new Date().getFullYear()} Spark AI Academy. All rights reserved.</p>
         <p className="text-xs mt-1">A place for fun, curiosity, and learning.</p>
       </div>
     </footer>

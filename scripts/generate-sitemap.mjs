@@ -53,7 +53,7 @@ function getCoursePages() {
 }
 
 
-const BASE_URL = 'https://ai-explorers-academy.com';
+const BASE_URL = 'https://spark-ai-academy.com';
 
 const staticPages = [
     '/',

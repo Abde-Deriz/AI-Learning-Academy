@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Point crawlers to the sitemap for a list of all pages
-Sitemap: https://ai-explorers-academy.com/sitemap.xml
+Sitemap: https://spark-ai-academy.com/sitemap.xml

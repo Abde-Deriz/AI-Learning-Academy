@@ -20,7 +20,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-400 to-purple-500 p-4">
       <div className="w-full max-w-md bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-8 text-center">
         <RobotIcon className="w-24 h-24 text-purple-600 mx-auto mb-4" />
-        <h1 className="text-4xl font-extrabold text-slate-800 mb-2">AI Explorers Academy</h1>
+        <h1 className="text-4xl font-extrabold text-slate-800 mb-2">Spark AI Academy</h1>
         <p className="text-slate-600 mb-8">Ready for an adventure into the world of AI?</p>
         
         <form onSubmit={handleSubmit}>

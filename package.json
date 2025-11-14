@@ -1,5 +1,5 @@
 {
-  "name": "ai-explorers-academy",
+  "name": "spark-ai-academy",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,12 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@google/genai": "^1.29.0",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "@google/genai": "^1.29.0",
-    "url": "^0.11.4",
-    "path": "^0.12.7",
-    "fs": "^0.0.1-security"
+    "react-router-dom": "^7.9.6",
+    "url": "^0.11.4"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

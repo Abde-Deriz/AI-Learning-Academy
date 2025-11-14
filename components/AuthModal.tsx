@@ -20,7 +20,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ initialView, onClose }) => {
 
   useEffect(() => {
     if (view === 'login') {
-      const lastUserEmail = localStorage.getItem('ai-explorers-last-loggedIn-email');
+      const lastUserEmail = localStorage.getItem('spark-ai-academy-last-loggedIn-email');
       if (lastUserEmail) {
         setEmail(lastUserEmail);
       }
@@ -38,7 +38,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ initialView, onClose }) => {
 
     // Simulate network delay for better UX
     setTimeout(() => {
-      const accounts = JSON.parse(localStorage.getItem('ai-explorers-accounts') || '{}');
+      const accounts = JSON.parse(localStorage.getItem('spark-ai-academy-accounts') || '{}');
       const account = accounts[email];
 
       if (!account) {
@@ -78,7 +78,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ initialView, onClose }) => {
 
     // Simulate network delay
     setTimeout(() => {
-      const accounts = JSON.parse(localStorage.getItem('ai-explorers-accounts') || '{}');
+      const accounts = JSON.parse(localStorage.getItem('spark-ai-academy-accounts') || '{}');
       if (accounts[email]) {
         setError('This email is already in use. Please log in.');
         setIsLoading(false);

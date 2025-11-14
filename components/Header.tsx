@@ -31,7 +31,7 @@ const Header: React.FC = () => {
     return (
        <header className="bg-white rounded-2xl shadow-lg p-6 flex flex-col md:flex-row justify-between items-center gap-6 animate-fade-in-down">
         <div>
-          <a href="/" onClick={(e) => { e.preventDefault(); navigate('/'); }} className="text-2xl font-bold text-slate-800 hover:text-indigo-600 transition">Welcome to AI Explorers Academy!</a>
+          <a href="/" onClick={(e) => { e.preventDefault(); navigate('/'); }} className="text-2xl font-bold text-slate-800 hover:text-indigo-600 transition">Welcome to Spark AI Academy!</a>
           <p className="text-slate-500">Preview the courses below or sign up to save your progress.</p>
         </div>
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
@@ -50,7 +50,7 @@ const Header: React.FC = () => {
     <>
       <header className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 animate-fade-in-down">
         {/* Top row with icons */}
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-start">
           {/* Left Side: Avatar and Desktop Welcome Text */}
           <div className="flex items-center gap-3">
             <button data-guide-id="profile-button" onClick={() => setIsEditModalOpen(true)} className="rounded-full hover:ring-4 hover:ring-indigo-300 transition-all duration-200 flex-shrink-0" aria-label="Edit your profile">

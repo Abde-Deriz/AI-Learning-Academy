@@ -24,7 +24,7 @@ const PrivacyPolicy: React.FC = () => {
             <div className="prose max-w-none text-slate-700">
                 <h2 className="text-2xl font-bold text-slate-700">Introduction</h2>
                 <p>
-                    Welcome to AI Explorers Academy! We are committed to protecting your privacy and handling your data in an open and transparent manner. This privacy policy sets out how we collect, use, and safeguard your information when you use our application.
+                    Welcome to Spark AI Academy! We are committed to protecting your privacy and handling your data in an open and transparent manner. This privacy policy sets out how we collect, use, and safeguard your information when you use our application.
                 </p>
                 <h2 className="text-2xl font-bold text-slate-700 mt-6">Information We Collect</h2>
                 <p>
@@ -38,7 +38,7 @@ const PrivacyPolicy: React.FC = () => {
                 </ul>
                 <h2 className="text-2xl font-bold text-slate-700 mt-6">How We Use Your Information</h2>
                 <p>
-                    The information we collect is used solely to provide and improve the AI Explorers Academy experience. Specifically, we use it to:
+                    The information we collect is used solely to provide and improve the Spark AI Academy experience. Specifically, we use it to:
                 </p>
                 <ul>
                     <li>Create and manage your user account.</li>

@@ -16,7 +16,7 @@ export const FeatureTooltip: React.FC<FeatureTooltipProps> = ({
   children,
   position = 'bottom',
 }) => {
-  const storageKey = `ai-explorers-feature-seen-${featureId}`;
+  const storageKey = `spark-ai-academy-feature-seen-${featureId}`;
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
