@@ -49,21 +49,26 @@ const Header: React.FC = () => {
   return (
     <>
       <header className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 animate-fade-in-down">
-        {/* Top section with user info and stats */}
-        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-          <div className="flex items-center gap-3" data-guide-id="profile-button">
-            <button onClick={() => setIsEditModalOpen(true)} className="rounded-full hover:ring-4 hover:ring-indigo-300 transition-all duration-200 flex-shrink-0" aria-label="Edit your profile">
-              <Avatar avatar={user.avatar} className="w-12 h-12 sm:w-16 sm:h-16" />
+        {/* Top row: Welcome message (desktop) / Empty (mobile) on left, Icons on right */}
+        <div className="flex justify-between items-start">
+          {/* Welcome message (Desktop) */}
+          <div className="hidden sm:flex items-center gap-3">
+            <button data-guide-id="profile-button" onClick={() => setIsEditModalOpen(true)} className="rounded-full hover:ring-4 hover:ring-indigo-300 transition-all duration-200 flex-shrink-0" aria-label="Edit your profile">
+              <Avatar avatar={user.avatar} className="w-16 h-16" />
             </button>
             <div>
-                <a href="/" onClick={(e) => { e.preventDefault(); navigate('/'); }} className="text-lg sm:text-2xl font-bold text-slate-800 hover:text-indigo-600 transition">
-                  Welcome, <span className="text-indigo-600">{user?.name}!</span>
-                </a>
-                <p className="text-slate-500 text-sm">Let's learn something new today!</p>
+              <a href="/" onClick={(e) => { e.preventDefault(); navigate('/'); }} className="text-2xl font-bold text-slate-800 hover:text-indigo-600 transition">
+                Welcome, <span className="text-indigo-600">{user?.name}!</span>
+              </a>
+              <p className="text-slate-500 text-sm">Let's learn something new today!</p>
             </div>
           </div>
-
-          <div className="flex items-center gap-3 sm:gap-4">
+          
+          {/* Icons (all screens) */}
+          <div className="w-full sm:w-auto flex items-center justify-end gap-2 sm:gap-4">
+            <button data-guide-id="profile-button" onClick={() => setIsEditModalOpen(true)} className="sm:hidden rounded-full hover:ring-4 hover:ring-indigo-300 transition-all duration-200 flex-shrink-0" aria-label="Edit your profile">
+              <Avatar avatar={user.avatar} className="w-12 h-12" />
+            </button>
             {streak > 0 && (
               <div
                 className="flex items-center gap-1 sm:gap-2 rounded-full bg-gradient-to-r from-orange-400 to-red-500 text-white font-bold px-2.5 py-1 sm:px-3 sm:py-1.5 animate-streak-glow"
@@ -84,8 +89,16 @@ const Header: React.FC = () => {
           </div>
         </div>
         
-        {/* New Integrated Progress Bar */}
-        <div className="mt-4 sm:mt-6 pt-4 border-t border-slate-200">
+        {/* Welcome message (Mobile) */}
+        <div className="sm:hidden mt-4">
+          <a href="/" onClick={(e) => { e.preventDefault(); navigate('/'); }} className="text-lg font-bold text-slate-800 hover:text-indigo-600 transition">
+            Welcome, <span className="text-indigo-600">{user?.name}!</span>
+          </a>
+          <p className="text-slate-500 text-sm">Let's learn something new today!</p>
+        </div>
+        
+        {/* Progress Bar (all screens) */}
+        <div className="mt-4 pt-4 border-t border-slate-200">
             <div className="flex justify-between items-center text-sm font-bold mb-2">
                 <span className="text-slate-600">Journey to AI Expert</span>
                 <span className="text-amber-600 flex items-center gap-1">

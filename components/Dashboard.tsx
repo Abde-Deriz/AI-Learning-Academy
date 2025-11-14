@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { Course, Difficulty } from '../types';
 import CourseCard from './CourseCard';
 import Header from './Header';
@@ -7,15 +7,19 @@ import ProgressSummary from './ProgressSummary';
 import SearchBar from './SearchBar';
 import BadgesDisplay from './BadgesDisplay';
 import { useAppContext } from '../context/AppContext';
-import { HeartIcon } from './Icons';
+import { HeartIcon, LoaderIcon } from './Icons';
 
 type FilterType = 'all' | Difficulty | 'favorites';
+
+const INITIAL_LOAD_COUNT = 8;
+const LOAD_MORE_COUNT = 8;
 
 const Dashboard: React.FC = () => {
   const { courses, user, favoriteCourses, navigate } = useAppContext();
   
   const [searchTerm, setSearchTerm] = useState('');
   const [activeFilter, setActiveFilter] = useState<FilterType>('all');
+  const [visibleCount, setVisibleCount] = useState(INITIAL_LOAD_COUNT);
 
   // Effect to sync component state FROM URL on mount and on history navigation (back/forward)
   useEffect(() => {
@@ -40,6 +44,11 @@ const Dashboard: React.FC = () => {
       window.removeEventListener('popstate', syncStateFromURL); // Cleanup
     };
   }, [user]); // Rerun if user logs in/out, to correctly handle 'favorites' filter
+  
+  // Reset visible count when filters change
+  useEffect(() => {
+    setVisibleCount(INITIAL_LOAD_COUNT);
+  }, [searchTerm, activeFilter]);
 
   // Function to update URL FROM component state
   const updateURL = (newSearchTerm: string, newFilter: FilterType) => {
@@ -102,6 +111,21 @@ const Dashboard: React.FC = () => {
       return titleMatch || descMatch || lessonMatch;
     });
   }, [searchTerm, courses, activeFilter, favoriteCourses, user]);
+  
+  const coursesToShow = useMemo(() => {
+    return filteredCourses.slice(0, visibleCount);
+  }, [filteredCourses, visibleCount]);
+  
+  const observer = useRef<IntersectionObserver>();
+  const loaderRef = useCallback(node => {
+    if (observer.current) observer.current.disconnect();
+    observer.current = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && visibleCount < filteredCourses.length) {
+        setVisibleCount(prev => prev + LOAD_MORE_COUNT);
+      }
+    }, { rootMargin: "200px" });
+    if (node) observer.current.observe(node);
+  }, [filteredCourses.length, visibleCount]);
 
   return (
     <div>
@@ -145,15 +169,21 @@ const Dashboard: React.FC = () => {
 
         {filteredCourses.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredCourses.map((course, index) => (
+            {coursesToShow.map((course, index) => (
                 <CourseCard
                 key={course.id}
                 course={course}
-                onSelectCourse={() => navigate(`/course/${course.slug}`)}
+                // FIX: The onSelectCourse prop expects a function that takes a course, but was passed a function with no arguments.
+                onSelectCourse={(selectedCourse) => navigate(`/course/${selectedCourse.slug}`)}
                 isFirst={index === 0 && !searchTerm} // Guide only points to first card on initial load
                 animationDelay={300 + index * 100}
                 />
             ))}
+             {visibleCount < filteredCourses.length && (
+                <div ref={loaderRef} className="col-span-full h-20 flex justify-center items-center">
+                    <LoaderIcon className="w-8 h-8 animate-spin text-indigo-500" />
+                </div>
+            )}
             </div>
         ) : (
             <div className="text-center py-12 bg-white rounded-2xl shadow-sm">

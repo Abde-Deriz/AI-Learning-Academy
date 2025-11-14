@@ -1,7 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
 import { HelpType, MissionData, MissionType } from '../types';
 
-const API_KEY = "no api key";//process.env.API_KEY;
+const API_KEY = process.env.API_KEY;
 
 if (!API_KEY) {
   console.warn("API_KEY environment variable not set for Gemini.");
