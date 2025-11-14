@@ -98,5 +98,5 @@ export interface AppContextType {
   favoriteCourses: Set<string>;
   toggleFavoriteCourse: (courseId: string) => void;
   addStarPenalty: (amount: number) => void;
-  navigate: (path: string) => void;
+  navigate: (path: string, replace?: boolean) => void;
 }

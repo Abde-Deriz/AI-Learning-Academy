@@ -116,8 +116,9 @@ const Dashboard: React.FC = () => {
     return filteredCourses.slice(0, visibleCount);
   }, [filteredCourses, visibleCount]);
   
-  const observer = useRef<IntersectionObserver>();
-  const loaderRef = useCallback(node => {
+  // FIX: Initialize useRef with null to satisfy the requirement of passing an argument.
+  const observer = useRef<IntersectionObserver | null>(null);
+  const loaderRef = useCallback((node: HTMLDivElement | null) => {
     if (observer.current) observer.current.disconnect();
     observer.current = new IntersectionObserver(entries => {
       if (entries[0].isIntersecting && visibleCount < filteredCourses.length) {
@@ -173,7 +174,7 @@ const Dashboard: React.FC = () => {
                 <CourseCard
                 key={course.id}
                 course={course}
-                onSelectCourse={(selectedCourse) => navigate(`/course/${selectedCourse.slug}`)}
+                onSelectCourse={(selectedCourse: Course) => navigate(`/course/${selectedCourse.slug}`)}
                 isFirst={index === 0 && !searchTerm} // Guide only points to first card on initial load
                 animationDelay={300 + index * 100}
                 />
